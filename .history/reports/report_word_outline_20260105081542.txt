@@ -1,0 +1,120 @@
+BÁO CÁO: DỰ BÁO GIÁ CỔ PHIẾU VÀ BOT GIAO DỊCH TỰ ĐỘNG
+
+CHƯƠNG 1: GIỚI THIỆU
+1.1 Lý do chọn đề tài
+- Thị trường chứng khoán Việt Nam tăng trưởng nhanh, nhu cầu dự báo giá và tự động hóa giao dịch cao.
+- Dữ liệu giá sẵn có từ Yahoo Finance, phù hợp áp dụng Big Data và học máy.
+- Kỳ vọng cải thiện quyết định đầu tư và đánh giá hiệu quả chiến lược bằng backtest.
+
+1.2 Mục tiêu nghiên cứu
+- Xây dựng pipeline thu thập, tiền xử lý, trích xuất đặc trưng, huấn luyện mô hình dự báo giá/return.
+- Tạo bot backtest tín hiệu BUY/SELL dựa trên dự báo, có quản trị rủi ro cơ bản.
+- Đánh giá chất lượng mô hình và chiến lược bằng các chỉ số lỗi và đường vốn.
+
+1.3 Đối tượng và phạm vi nghiên cứu
+- Đối tượng: cổ phiếu Việt Nam có dữ liệu trên Yahoo Finance.
+- Phạm vi: dữ liệu giá ngày (OHLCV), dự báo horizon ngắn (1 ngày), không xét phí giao dịch, thanh khoản sâu, hoặc tin tức.
+
+1.4 Phương pháp nghiên cứu
+- Thực nghiệm với dữ liệu lịch sử; tách tập train/val/test theo thời gian.
+- Mô hình hồi quy tuyến tính và LSTM để dự báo return.
+- Backtest mô phỏng danh mục với stop-loss, take-profit, position sizing cố định.
+
+1.5 Cấu trúc báo cáo
+- Chương 2 trình bày nền tảng lý thuyết.
+- Chương 3 mô tả dữ liệu và công cụ.
+- Chương 4 nêu quy trình và mô hình đề xuất.
+- Chương 5 báo cáo thực nghiệm và đánh giá.
+- Chương 6 kết luận và hướng phát triển.
+
+CHƯƠNG 2: CƠ SỞ LÝ THUYẾT VÀ TỔNG QUAN
+2.1 Tổng quan về Big Data
+- Đặc trưng 5V (Volume, Velocity, Variety, Veracity, Value) trong tài chính; dữ liệu giá, sự kiện, khối lượng.
+- Hạ tầng: lưu trữ (SQL Server), xử lý batch, logging.
+
+2.2 Bài toán dự đoán giá cổ phiếu
+- Mục tiêu: dự báo return/giá ngày kế tiếp để sinh tín hiệu giao dịch.
+- Thách thức: nhiễu cao, phi tuyến, thay đổi chế độ thị trường; cần tránh look-ahead bias.
+
+2.3 Các mô hình học máy và deep learning dùng trong dự đoán
+- Hồi quy tuyến tính với đặc trưng kỹ thuật (MA5/MA20, return_1d, volatility).
+- LSTM cho chuỗi thời gian có độ trễ; cần chuẩn hóa và tạo sequence lookback.
+- So sánh: tuyến tính dễ diễn giải, LSTM nắm bắt phi tuyến và phụ thuộc thời gian.
+
+2.4 Tổng quan về bot giao dịch tự động
+- Quy trình: dự báo → sinh tín hiệu → quản lý lệnh → quản trị rủi ro → đo lường hiệu quả.
+- Thành phần tối thiểu: ngưỡng tín hiệu BUY/SELL, kích thước vị thế, stop-loss/take-profit, nhật ký giao dịch.
+
+CHƯƠNG 3: DỮ LIỆU VÀ CÔNG CỤ SỬ DỤNG
+3.1 Nguồn dữ liệu
+- Yahoo Finance: giá OHLCV và mã giao dịch (ticker_yahoo → ticker_vn).
+- Lưu song song CSV (`data/raw`, `data/processed`, `data/features`) và cơ sở dữ liệu SQL Server.
+
+3.2 Đặc điểm dữ liệu
+- Tần suất: ngày; trường: trade_date, open, high, low, close, adj_close, volume, ticker.
+- Xử lý thiếu: loại bỏ volume=0, giá <=0, trùng ngày; chuẩn hóa kiểu số và ngày.
+
+3.3 Công cụ và môi trường triển khai
+- Ngôn ngữ: Python 3.10+; thư viện: pandas, numpy, scikit-learn, tensorflow/keras, SQLAlchemy, yfinance.
+- CSDL: SQL Server qua ODBC Driver 17; cấu hình trong `config/config.yaml`.
+- Quản lý mô hình/artefact: lưu tại `models/` và `preds/`.
+
+CHƯƠNG 4: PHƯƠNG PHÁP VÀ MÔ HÌNH ĐỀ XUẤT
+4.1 Quy trình xử lý dữ liệu
+- Crawl: tải giá từ Yahoo, lưu `data/raw/prices_raw.csv`, upsert bảng `prices_raw`/`tickers`.
+- Tiền xử lý: làm sạch, lọc volume/giá bất thường, lưu `data/processed/prices_clean.csv`, nạp `prices_clean`.
+- Trích xuất đặc trưng: MA5, MA20, return_1d, vol_10, label_next_return, lưu `data/features/features.csv`, merge bảng `features`.
+
+4.2 Xây dựng mô hình dự đoán giá
+- Linear Regression: chuẩn hóa với StandardScaler, huấn luyện trên đặc trưng tĩnh.
+- LSTM: chuẩn hóa MinMaxScaler, tạo sequence lookback (mặc định 30 ngày), kiến trúc LSTM(64) → Dense(32) → Dense(1), early stopping.
+- Tách tập thời gian: train/val/test theo tỷ lệ 70/15/15 (cấu hình).
+
+4.3 Thiết kế bot giao dịch tự động
+- Sinh tín hiệu: BUY nếu pred_return > threshold, SELL nếu < -threshold, else HOLD.
+- Quản trị rủi ro: position_size_pct cố định, stop-loss, take-profit; nhật ký giao dịch.
+- Backtest: mô phỏng tiền mặt và vị thế, lưu `preds/backtest/backtest_results.csv` và bảng `backtest_trades`.
+
+4.4 Tiêu chí đánh giá mô hình
+- Chỉ số giá: MAE, RMSE, MAPE giữa pred_price và actual_close.
+- Chỉ số return: MAE, RMSE, MAPE giữa pred_return và actual_return.
+- Hiệu quả bot: đường vốn (equity curve), PnL/ticker, số lệnh BUY/SELL, tuân thủ stop-loss/take-profit.
+
+CHƯƠNG 5: THỰC NGHIỆM VÀ ĐÁNH GIÁ
+5.1 Thiết lập thực nghiệm
+- Dữ liệu: lấy từ Yahoo Finance theo danh sách `config/tickers_vn.csv`; horizon 1 ngày; lookback 30.
+- Môi trường: Python 3.10, TensorFlow/Keras, SQL Server ODBC.
+- Chạy pipeline: `python -m src.run_pipeline` sau khi cấu hình DB và tickers.
+
+5.2 Kết quả dự đoán
+- Artefact: `preds/daily_predictions.csv` gồm ticker, trade_date, model_name, pred_return, pred_price.
+- (Điền số liệu sau khi chạy thực tế; hiện chưa kèm trong repo).
+
+5.3 Đánh giá hiệu quả mô hình
+- Báo cáo tự động: `reports/metrics_by_model.csv`, `reports/metrics_by_model_ticker.csv` (tạo bởi `src/evaluate_models.py`).
+- So sánh Linear Regression vs LSTM qua MAE/RMSE/MAPE (điền số khi chạy).
+
+5.4 Đánh giá bot giao dịch
+- File kết quả: `preds/backtest/backtest_results.csv` và bảng `backtest_trades`.
+- Phân tích: equity curve, PnL theo mã, số lệnh BUY/SELL/STOP, tác động stop-loss/take-profit.
+- Lưu ý: chưa tính phí giao dịch/trượt giá; tín hiệu trong ngày có thể trùng lệnh, cần làm sạch nếu mở rộng.
+
+CHƯƠNG 6: KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN
+6.1 Kết luận chung
+- Pipeline end-to-end thu thập dữ liệu, trích xuất đặc trưng, huấn luyện Linear & LSTM, dự báo và backtest bot.
+- Khả năng mở rộng thêm ticker, cập nhật incremental, và lưu vết DB/CSV phục vụ phân tích.
+
+6.2 Hạn chế của đề tài
+- Phụ thuộc SQL Server, chưa có chế độ chạy thuần file để tái lập nhanh.
+- Chưa xét phí giao dịch, thanh khoản, trượt giá; backtest đơn giản.
+- Thiếu kiểm thử tự động và giám sát drift dữ liệu/mô hình.
+
+6.3 Hướng nghiên cứu tiếp theo
+- Bổ sung phí giao dịch, kiểm soát thanh khoản, và lọc tín hiệu trùng lệnh.
+- Thử nghiệm mô hình phi tuyến khác (XGBoost, Transformer time-series), tối ưu siêu tham số.
+- Thiết lập pipeline MLOps: versioning model/data, monitoring, cảnh báo drift, dashboard kết quả.
+
+TÀI LIỆU THAM KHẢO
+- Tài liệu chính thức Yahoo Finance API/yfinance.
+- Tài liệu scikit-learn, TensorFlow/Keras cho mô hình hồi quy và LSTM.
+- Sách/khóa học về phân tích kỹ thuật, backtesting, và quản trị rủi ro (ví dụ: Advances in Financial Machine Learning, Marcos López de Prado).

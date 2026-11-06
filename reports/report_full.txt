@@ -1,0 +1,158 @@
+ỨNG DỤNG BIG DATA VÀ MACHINE LEARNING TRONG DỰ ĐOÁN GIÁ CỔ PHIẾU VÀ XÂY DỰNG BOT GIAO DỊCH TỰ ĐỘNG
+
+----------------------------------------
+TRANG BÌA (VĂN BẢN)
+----------------------------------------
+ĐỀ TÀI: ỨNG DỤNG BIG DATA VÀ MACHINE LEARNING TRONG DỰ ĐOÁN GIÁ CỔ PHIẾU VÀ XÂY DỰNG BOT GIAO DỊCH TỰ ĐỘNG
+MÔN HỌC: BIG DATA VÀ ỨNG DỤNG
+LỚP: KHOÁ 2024 – CÔNG NGHỆ THÔNG TIN
+SINH VIÊN THỰC HIỆN: NGUYỄN VĂN A – MSSV 2024xxxx
+GIẢNG VIÊN HƯỚNG DẪN: TS. TRẦN THỊ B
+THỜI GIAN: TP. HỒ CHÍ MINH, 2025
+
+----------------------------------------
+LỜI MỞ ĐẦU
+----------------------------------------
+Trong bối cảnh thị trường chứng khoán Việt Nam tăng trưởng nhanh về quy mô và mức độ tham gia của nhà đầu tư cá nhân, nhu cầu ứng dụng các phương pháp phân tích dữ liệu hiện đại để dự báo giá và hỗ trợ ra quyết định trở nên cấp thiết. Big Data và Machine Learning đem lại khả năng xử lý khối lượng dữ liệu lớn, liên tục cập nhật và giàu đa dạng, từ đó phát hiện các mẫu hình ẩn trong chuỗi giá và khối lượng giao dịch. Đề tài này được xây dựng nhằm khảo sát và triển khai một quy trình hoàn chỉnh kết hợp học máy truyền thống và deep learning, giúp so sánh hiệu quả các tiếp cận khác nhau trong dự báo giá cổ phiếu.
+Bên cạnh việc dự báo, thực tiễn cho thấy yếu tố con người thường bị ảnh hưởng bởi cảm xúc khi giao dịch, dẫn đến quyết định không nhất quán. Một bot giao dịch tự động được thiết kế bài bản có thể chuyển đổi tín hiệu dự báo thành hành động BUY/SELL/HOLD theo quy tắc rõ ràng, đồng thời áp dụng quản trị rủi ro như stop-loss, take-profit. Việc xây dựng và backtest bot trên dữ liệu lịch sử giúp kiểm chứng tính khả thi của chiến lược trước khi triển khai thực tế.
+Đề tài sử dụng nguồn dữ liệu giá daily công khai từ Yahoo Finance cho các mã cổ phiếu Việt Nam, lưu trữ tập trung trên SQL Server để đảm bảo tính toàn vẹn và khả năng truy vấn. Quy trình pipeline gồm các bước crawl dữ liệu, làm sạch, tạo đặc trưng (feature engineering), huấn luyện hai mô hình Linear Regression và LSTM, sinh dự báo và mô phỏng chiến lược giao dịch. Các thước đo MAE, RMSE, MAPE cho giá và return, cùng các chỉ số backtest như equity curve, PnL và win-rate, được sử dụng để đánh giá toàn diện.
+Kết quả nghiên cứu kỳ vọng mang lại cái nhìn thực tiễn về việc áp dụng Big Data và Machine Learning vào dự báo giá cổ phiếu tại thị trường Việt Nam, đồng thời cung cấp khung tham chiếu cho việc thiết kế bot giao dịch tự động. Báo cáo này được thực hiện với tinh thần học thuật, trung lập và cẩn trọng, hy vọng có thể đóng góp một tài liệu tham khảo hữu ích cho sinh viên, nhà nghiên cứu và người làm nghề liên quan.
+Xin trân trọng cảm ơn quý giảng viên, bạn bè và các nguồn tài liệu đã hỗ trợ trong quá trình thực hiện đề tài.
+
+----------------------------------------
+MỤC LỤC
+----------------------------------------
+TRANG BÌA
+LỜI MỞ ĐẦU
+MỤC LỤC
+CHƯƠNG 1: GIỚI THIỆU
+  1.1. Lý do chọn đề tài
+  1.2. Mục tiêu nghiên cứu
+  1.3. Đối tượng và phạm vi nghiên cứu
+  1.4. Phương pháp nghiên cứu
+  1.5. Cấu trúc báo cáo
+CHƯƠNG 2: CƠ SỞ LÝ THUYẾT VÀ TỔNG QUAN
+  2.1. Tổng quan về Big Data
+  2.2. Bài toán dự đoán giá cổ phiếu
+  2.3. Các mô hình học máy và deep learning dùng trong dự đoán
+  2.4. Tổng quan về bot giao dịch tự động
+CHƯƠNG 3: DỮ LIỆU VÀ CÔNG CỤ SỬ DỤNG
+  3.1. Nguồn dữ liệu
+  3.2. Đặc điểm dữ liệu
+  3.3. Công cụ và môi trường triển khai
+CHƯƠNG 4: PHƯƠNG PHÁP VÀ MÔ HÌNH ĐỀ XUẤT
+  4.1. Quy trình xử lý dữ liệu
+  4.2. Xây dựng mô hình dự đoán giá
+  4.3. Thiết kế bot giao dịch tự động
+  4.4. Tiêu chí đánh giá mô hình
+CHƯƠNG 5: THỰC NGHIỆM VÀ ĐÁNH GIÁ
+  5.1. Thiết lập thực nghiệm
+  5.2. Kết quả dự đoán
+  5.3. Đánh giá hiệu quả mô hình
+  5.4. Đánh giá bot giao dịch
+CHƯƠNG 6: KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN
+  6.1. Kết luận chung
+  6.2. Hạn chế của đề tài
+  6.3. Hướng nghiên cứu tiếp theo
+TÀI LIỆU THAM KHẢO
+
+CHƯƠNG 1: GIỚI THIỆU
+
+1.1. Lý do chọn đề tài
+Thị trường chứng khoán Việt Nam trong những năm gần đây chứng kiến sự tăng trưởng mạnh về quy mô vốn hóa, thanh khoản và số lượng nhà đầu tư cá nhân. Sự phổ biến của các nền tảng giao dịch trực tuyến cùng dòng dữ liệu thời gian thực tạo ra nhu cầu cấp thiết về công cụ phân tích và dự báo hỗ trợ quyết định giao dịch. Trong bối cảnh đó, Big Data và Machine Learning trở thành trụ cột để xử lý khối lượng dữ liệu khổng lồ, đa dạng và liên tục gia tăng, từ đó phát hiện những mẫu hình ẩn trong chuỗi giá và khối lượng giao dịch. Việc nghiên cứu một quy trình áp dụng hai trụ cột này vào bài toán dự báo giá cổ phiếu Việt Nam vì thế mang ý nghĩa thực tiễn và học thuật.
+Nguồn dữ liệu lịch sử giá daily của cổ phiếu Việt Nam được cung cấp miễn phí qua Yahoo Finance, là nền tảng thuận lợi để xây dựng kho dữ liệu và pipeline phân tích. Thay vì thu thập từ nhiều nguồn phân tán, sử dụng Yahoo Finance giúp chuẩn hóa định dạng, giảm chi phí thu thập và dễ dàng cập nhật. Đây là ví dụ điển hình về khai thác dữ liệu sẵn có trên Internet để phục vụ nghiên cứu Big Data, đáp ứng nhu cầu phân tích nhanh và mở rộng trong tương lai.
+Việc kết hợp Linear Regression và LSTM cho phép so sánh hai hướng tiếp cận đại diện: mô hình tuyến tính truyền thống dễ diễn giải, phù hợp với dữ liệu ít nhiễu, và mô hình deep learning LSTM có khả năng học quan hệ phi tuyến, phụ thuộc dài hạn của chuỗi thời gian. Đây là cách tiếp cận cân bằng giữa tính minh bạch và khả năng biểu diễn mạnh, giúp đánh giá ưu/nhược điểm của từng mô hình trên cùng bộ dữ liệu. Sự đối sánh này góp phần làm rõ bài học kinh nghiệm khi chọn mô hình cho bài toán time series tài chính.
+SQL Server được chọn làm hạ tầng lưu trữ để bảo đảm tính toàn vẹn dữ liệu, khả năng mở rộng và hỗ trợ tốt cho truy vấn phân tích. Trong bối cảnh ứng dụng thực tế tại doanh nghiệp, một hệ quản trị cơ sở dữ liệu quan hệ quen thuộc, ổn định và hỗ trợ ODBC là lựa chọn an toàn, dễ triển khai. Việc lưu trữ dữ liệu, đặc trưng, mô hình và kết quả dự báo vào SQL Server còn giúp tái sử dụng, kiểm soát phiên bản và tạo nền tảng tích hợp với các hệ thống BI hoặc dashboard sau này.
+
+1.2. Mục tiêu nghiên cứu
+Mục tiêu tổng quát của nghiên cứu này là thiết kế và triển khai một pipeline đầy đủ cho bài toán dự đoán giá cổ phiếu Việt Nam, đồng thời kiểm thử một bot giao dịch tự động dựa trên kết quả dự báo. Pipeline phải đảm bảo các bước từ thu thập dữ liệu, làm sạch, tạo đặc trưng, huấn luyện mô hình, suy luận (inference) cho đến backtest chiến lược, kết hợp lưu trữ tập trung. Việc có một quy trình khép kín giúp giảm sai sót thủ công, tăng tính lặp lại và khả năng mở rộng.
+Về mục tiêu cụ thể, thứ nhất là xây dựng và vận hành thành công pipeline thu thập dữ liệu từ Yahoo Finance, làm sạch và tạo đặc trưng kỹ thuật (MA5, MA20, return, volatility), lưu trữ vào SQL Server và xuất ra các tệp CSV ở mỗi bước. Thứ hai là huấn luyện và so sánh hiệu quả của Linear Regression và LSTM trên cùng bộ dữ liệu và tiêu chí đánh giá, nhằm rút ra kết luận thực nghiệm về khả năng dự báo của hai mô hình. Thứ ba là phát triển một bot backtest chuyển đổi pred_return và pred_price thành tín hiệu BUY/SELL/HOLD, mô phỏng danh mục với các tham số quản trị rủi ro, qua đó kiểm tra chiến lược trước khi cân nhắc triển khai thực tế.
+Ngoài ra, mục tiêu còn bao gồm xây dựng bộ tiêu chí đánh giá bao quát: MAE, RMSE, MAPE cho giá và return để đo chất lượng dự báo; equity curve, PnL, win-rate để đo hiệu quả chiến lược. Kết quả đánh giá này vừa phục vụ so sánh mô hình, vừa cung cấp thông tin phản hồi cho việc điều chỉnh ngưỡng tín hiệu và tham số bot.
+
+1.3. Đối tượng và phạm vi nghiên cứu
+Đối tượng nghiên cứu là các mã cổ phiếu niêm yết tại Việt Nam, danh sách được cấu hình trong tệp config/tickers_vn.csv. Việc cố định danh sách mã cho phép kiểm soát phạm vi và đảm bảo tính nhất quán trong quá trình thu thập, huấn luyện và đánh giá. Đối với mỗi mã, dữ liệu giá daily và khối lượng giao dịch được coi là chuỗi thời gian cần dự báo, nhấn mạnh bối cảnh thực tế của thị trường Việt Nam.
+Phạm vi dữ liệu tập trung vào giá daily (open, high, low, close, adj_close) và volume từ Yahoo Finance. Horizon dự báo được xác định là 1 ngày nhằm phục vụ các quyết định giao dịch ngắn hạn, phù hợp với mục tiêu backtest chiến lược BUY/SELL/HOLD đơn giản. Việc chọn horizon ngắn cũng giúp giảm độ phức tạp, tránh tích lũy sai số dài hạn và tập trung vào tín hiệu động lượng ngắn hạn.
+Nghiên cứu này không bao gồm triển khai giao dịch thật trên sàn, không tính đến phí giao dịch, trượt giá hay vấn đề thanh khoản lệnh. Những yếu tố này có thể làm sai lệch kết quả backtest nếu chưa được mô hình hóa đầy đủ, do đó được loại trừ để giữ phạm vi gọn và tập trung vào khả năng dự báo và logic chiến lược. Ngoài ra, dữ liệu intraday, tin tức, dữ liệu vĩ mô hay sentiment không được sử dụng trong phạm vi hiện tại, nhưng được đề cập ở phần hướng phát triển.
+
+1.4. Phương pháp nghiên cứu
+Phương pháp nghiên cứu được thiết kế theo dạng pipeline tuần tự, bảo đảm mỗi bước đều có đầu vào, đầu ra rõ ràng và có thể kiểm tra. Bước đầu tiên là thu thập dữ liệu từ Yahoo Finance bằng yfinance, ghi nhận vào CSV và chèn vào bảng prices_raw của SQL Server. Bước thứ hai là tiền xử lý: chuẩn hóa kiểu dữ liệu, loại bỏ giá trị thiếu, volume bằng 0 hoặc giá không hợp lệ, sắp xếp theo thời gian, lưu vào prices_clean và CSV. Bước thứ ba là feature engineering: tính return_1d, MA5, MA20, vol_10 và nhãn label_next_return, lưu vào features.
+Tiếp theo, dữ liệu đặc trưng được chia theo trục thời gian cho train/validation/test để tránh leakage. Linear Regression sử dụng StandardScaler, tối ưu phương trình y = w^T x + b; LSTM sử dụng MinMaxScaler, tạo sequence lookback (mặc định 30), kiến trúc LSTM(64) → Dense(32) → Dense(1), huấn luyện với EarlyStopping. Các mô hình sau huấn luyện được lưu trữ để phục vụ suy luận.
+Giai đoạn đánh giá sử dụng MAE, RMSE, MAPE trên pred_price và actual_close, đồng thời đánh giá pred_return. Kết quả dự báo được lưu vào predictions; bot backtest tạo tín hiệu theo ngưỡng, mô phỏng danh mục với initial_cash, position_size_pct, stop-loss, take-profit, lưu kết quả vào backtest_trades và CSV. Việc trực quan hóa qua biểu đồ (equity curve, PnL theo mã, phân bố sai số) giúp phân tích sâu hơn và hỗ trợ kết luận.
+
+1.5. Cấu trúc báo cáo
+Báo cáo được tổ chức thành sáu chương nhằm dẫn dắt người đọc từ bối cảnh đến kết luận. Chương 1 trình bày lý do chọn đề tài, mục tiêu, phạm vi, phương pháp và cấu trúc. Chương 2 cung cấp nền tảng lý thuyết về Big Data, dự báo giá cổ phiếu, đặc thù time series, các mô hình Linear Regression, LSTM và khái niệm bot giao dịch/backtest. Chương 3 mô tả nguồn dữ liệu, đặc điểm trường thông tin và hạ tầng công cụ. Chương 4 đi sâu vào quy trình xử lý, thiết kế mô hình và bot, cùng tiêu chí đánh giá. Chương 5 trình bày thực nghiệm, kết quả dự báo, so sánh mô hình và phân tích backtest. Chương 6 kết luận, nêu hạn chế và định hướng phát triển. Cuối cùng là Tài liệu tham khảo liệt kê nguồn học thuật và tài liệu kỹ thuật liên quan.
+
+Tóm tắt Chương 1
+Chương 1 đã thiết lập bối cảnh và động lực nghiên cứu, xác định mục tiêu tổng quát và cụ thể, phạm vi dữ liệu và giới hạn của đề tài. Phương pháp nghiên cứu được phác thảo dưới dạng pipeline khép kín kết hợp hai mô hình đại diện và hệ quản trị cơ sở dữ liệu quan hệ. Cấu trúc báo cáo được giới thiệu để định hướng người đọc cho các chương tiếp theo. Những nội dung này tạo nền tảng cho phần cơ sở lý thuyết ở Chương 2 và các bước triển khai chi tiết ở các chương sau.
+
+CHƯƠNG 2: CƠ SỞ LÝ THUYẾT VÀ TỔNG QUAN
+
+2.1. Tổng quan về Big Data
+Big Data được hình thành từ nhu cầu xử lý những tập dữ liệu có khối lượng cực lớn, tốc độ phát sinh nhanh, đa dạng định dạng và đòi hỏi tính tin cậy cao. Trong tài chính, đặc biệt là thị trường chứng khoán, dữ liệu giá và khối lượng được cập nhật liên tục theo thời gian, đồng thời song hành với dữ liệu phi cấu trúc như tin tức, mạng xã hội và báo cáo doanh nghiệp. Bốn đặc trưng 4V (Volume, Velocity, Variety, Veracity) hiện diện rõ ràng: khối lượng dữ liệu tích lũy qua nhiều năm giao dịch; tốc độ cập nhật từng phút hoặc từng giây đối với dữ liệu intraday; đa dạng nguồn và định dạng; và yêu cầu đảm bảo tính chính xác để phục vụ ra quyết định tài chính. Khả năng xử lý và lưu trữ phù hợp với các đặc trưng này quyết định hiệu quả ứng dụng Big Data trong phân tích tài chính.
+Ở khía cạnh lưu trữ, cơ sở dữ liệu quan hệ như SQL Server vẫn đóng vai trò quan trọng vì tính ổn định, hỗ trợ giao dịch và chuẩn SQL. Tuy nhiên, khi khối lượng và tốc độ tăng lên đáng kể (ví dụ dữ liệu tick-level), các nền tảng phân tán như Hadoop hoặc Spark trở thành lựa chọn cần cân nhắc. Hadoop cung cấp hệ thống file phân tán (HDFS) và khả năng xử lý batch song song, trong khi Spark hỗ trợ cả batch lẫn streaming, thích hợp với dòng dữ liệu thời gian thực. Trong phạm vi dữ liệu daily của đề tài, SQL Server đủ đáp ứng, nhưng việc hiểu biết về các nền tảng phân tán là cần thiết cho định hướng mở rộng.
+Veracity – tính tin cậy – là yếu tố then chốt trong dữ liệu tài chính. Dữ liệu nhiễu, lỗi hoặc trễ có thể dẫn đến quyết định sai lầm. Vì vậy, các bước tiền xử lý, làm sạch, chuẩn hóa và kiểm soát chất lượng dữ liệu cần được chú trọng. Việc log lại quá trình thu thập, kiểm tra định dạng, loại bỏ giá trị thiếu, xử lý ngày giao dịch bị trùng hay sai lệch là minh chứng cho việc vận dụng nguyên tắc Veracity trong thực tế. Đây là một phần cốt lõi trong pipeline của đề tài, giúp duy trì độ tin cậy cho các bước học máy sau đó.
+
+2.2. Bài toán dự đoán giá cổ phiếu
+Dự báo giá hay tỷ suất sinh lợi (return) của cổ phiếu là bài toán kinh điển, nhưng luôn thách thức do thị trường chịu tác động của tâm lý nhà đầu tư, yếu tố vĩ mô và các biến động khó lường. Mục tiêu của dự báo ngắn hạn (horizon một ngày) là hỗ trợ quyết định giao dịch nhanh, tận dụng tín hiệu động lượng hoặc đảo chiều. Trong bối cảnh thị trường Việt Nam, thanh khoản và mức độ thông tin có thể khác biệt so với các thị trường phát triển, khiến tín hiệu dễ nhiễu và mô hình dễ overfit nếu không kiểm soát.
+Đặc trưng của bài toán chuỗi thời gian là tính phụ thuộc theo thứ tự. Việc sử dụng thông tin tương lai trong quá trình huấn luyện hoặc kiểm thử (look-ahead bias) sẽ làm sai lệch kết quả, khiến mô hình tỏ ra tốt giả tạo. Do đó, dữ liệu cần được sắp xếp theo thời gian, chia tập train/validation/test tuần tự, tránh shuffle ngẫu nhiên. Ngoài ra, thời điểm cắt tập cần được cân nhắc để phản ánh đúng điều kiện giao dịch: dữ liệu huấn luyện chỉ bao gồm lịch sử trước thời điểm dự báo.
+Các đặc trưng kỹ thuật cơ bản, như trung bình trượt (MA), biến động (volatility) và return_1d, được sử dụng như baseline. Chẳng hạn, MA5 và MA20 cho thấy xu hướng ngắn và trung hạn; độ lệch chuẩn return 10 ngày phản ánh mức biến động. Đây là những đặc trưng đơn giản nhưng hữu ích, giúp mô hình có cơ sở để học quan hệ tuyến tính hoặc phi tuyến giữa quá khứ và tương lai. Về lâu dài, có thể mở rộng sang đặc trưng phái sinh, chỉ báo động lượng, hoặc dữ liệu vĩ mô, tin tức, song trong phạm vi nghiên cứu này, baseline kỹ thuật đủ để đánh giá và so sánh mô hình.
+
+2.3. Các mô hình học máy và deep learning dùng trong dự đoán
+Linear Regression là mô hình tuyến tính chuẩn mực, ước lượng quan hệ y = w^T x + b giữa đặc trưng và nhãn. Đối với dự báo label_next_return, mô hình tìm bộ trọng số w tối ưu để giảm sai số bình phương trên tập huấn luyện. Ưu điểm của Linear Regression là đơn giản, dễ diễn giải, nhanh huấn luyện, phù hợp khi dữ liệu không quá phức tạp và mối quan hệ gần tuyến tính. Hệ số hồi quy có thể được dùng để phân tích tầm quan trọng tương đối của đặc trưng, cung cấp góc nhìn giải thích mô hình.
+LSTM (Long Short-Term Memory) là kiến trúc Recurrent Neural Network có cơ chế cổng vào, cổng quên và cổng ra, giúp kiểm soát thông tin qua thời gian, tránh bão hòa gradient. Với chuỗi giá, LSTM có khả năng nắm bắt phụ thuộc dài hạn và quan hệ phi tuyến, phù hợp với dữ liệu có cấu trúc thời gian rõ rệt. Khi sử dụng LSTM, dữ liệu phải được chuẩn hóa (ví dụ MinMaxScaler) và biến đổi thành các sequence lookback cố định, cung cấp ngữ cảnh lịch sử cho mỗi điểm dự báo.
+Quy trình tiền xử lý đóng vai trò quyết định. Chuẩn hóa giúp các đặc trưng có cùng thang đo, tăng ổn định cho cả Linear Regression và LSTM. Việc tạo sequence với cửa sổ lookback 30 ngày (mặc định) giúp LSTM nhận thông tin quá khứ đủ dài mà vẫn giữ kích thước đầu vào hợp lý. So với Linear Regression, LSTM cần nhiều dữ liệu hơn, chi phí huấn luyện cao hơn, và kết quả khó diễn giải hơn, nhưng có tiềm năng mô hình hóa phi tuyến tốt hơn.
+
+2.4. Tổng quan về bot giao dịch tự động
+Bot giao dịch tự động là hệ thống chuyển đổi tín hiệu mô hình thành hành động giao dịch theo quy tắc xác định. Trong cấu trúc cơ bản, bot nhận đầu vào là pred_return hoặc pred_price, sinh tín hiệu BUY/SELL/HOLD dựa trên ngưỡng, và cập nhật danh mục với các tham số quản trị rủi ro như stop-loss và take-profit. Mục tiêu là loại bỏ yếu tố cảm tính, tăng tính kỷ luật và nhất quán trong giao dịch.
+Backtest là bước không thể thiếu trước khi triển khai thực tế. Bằng cách mô phỏng chiến lược trên dữ liệu lịch sử, nhà nghiên cứu có thể đo lường equity curve, PnL theo mã, win-rate, drawdown và so sánh với chiến lược buy-and-hold. Tuy nhiên, backtest dễ bị bias nếu dùng dữ liệu tương lai hoặc bỏ qua chi phí, trượt giá. Do đó, cần nêu rõ giả định và giới hạn của mô phỏng. Trong đề tài, phí và trượt giá chưa được tính, nên kết quả backtest đóng vai trò thăm dò hơn là cam kết hiệu quả thực tế.
+
+Tóm tắt Chương 2
+Chương 2 đã trình bày nền tảng lý thuyết cho nghiên cứu: khái niệm Big Data và đặc trưng 4V trong tài chính; bản chất và rủi ro của bài toán dự báo giá cổ phiếu; hai mô hình đại diện Linear Regression và LSTM cùng yêu cầu tiền xử lý; và khái niệm bot giao dịch, backtest. Những kiến thức này tạo khung tham chiếu cho việc thiết kế dữ liệu, mô hình và chiến lược ở các chương tiếp theo, đồng thời nhấn mạnh vai trò của kiểm soát chất lượng dữ liệu và tránh bias trong mọi bước.
+
+CHƯƠNG 3: DỮ LIỆU VÀ CÔNG CỤ SỬ DỤNG
+
+3.1. Nguồn dữ liệu
+Dữ liệu chính được sử dụng trong nghiên cứu là giá cổ phiếu daily của các mã niêm yết tại Việt Nam, thu thập từ Yahoo Finance. Đây là nguồn dữ liệu công khai, miễn phí, có độ phủ rộng và định dạng chuẩn, thuận tiện cho việc tự động hóa thu thập thông qua thư viện yfinance. Việc lựa chọn nguồn này giúp giảm chi phí thu thập, đảm bảo tính cập nhật và đồng nhất giữa các mã, đáp ứng yêu cầu về Volume và Velocity ở mức daily.
+Quy trình crawl dữ liệu được thực hiện bởi mô-đun crawl_data.py. Danh sách mã được định nghĩa trong tệp config/tickers_vn.csv, bảo đảm tính linh hoạt khi thêm hoặc loại bỏ mã. Dữ liệu tải về được lưu dưới dạng CSV trong thư mục data/raw, đồng thời chèn vào bảng prices_raw trong SQL Server. Việc lưu song song hai định dạng cho phép vừa kiểm tra thủ công, vừa tích hợp vào pipeline tự động. Cách tổ chức này cũng phù hợp với thực hành ETL trong môi trường doanh nghiệp, nơi cần bản ghi thô (raw) để kiểm toán.
+Dữ liệu sau khi làm sạch và tính toán đặc trưng được lưu tại data/processed, data/features, và các bảng tương ứng prices_clean, features trong SQL Server. Từ góc nhìn Big Data, việc phân tách dữ liệu theo tầng (raw, processed, features) giúp truy vết và giảm rủi ro nhiễu. Nếu trong tương lai mở rộng sang dữ liệu intraday hoặc kết hợp nguồn tin tức, cấu trúc lưu trữ này vẫn có thể mở rộng theo chiều ngang (thêm bảng/partition) mà không phá vỡ pipeline.
+
+3.2. Đặc điểm dữ liệu
+Bộ dữ liệu bao gồm các trường trade_date, open, high, low, close, adj_close và volume. Các trường giá thể hiện diễn biến giá trong ngày; adj_close điều chỉnh cổ tức/pha tách, giúp so sánh xuyên thời gian; volume phản ánh thanh khoản và mức độ quan tâm của thị trường. Đây là bộ trường tối thiểu để xây dựng các chỉ báo kỹ thuật, đồng thời đủ để mô tả hành vi giá cơ bản.
+Nhãn huấn luyện label_next_return được tính bằng tỷ suất sinh lợi của ngày kế tiếp so với close hiện tại. Horizon dự báo 1 ngày phù hợp với chiến lược giao dịch ngắn hạn, hạn chế tích lũy sai số và phù hợp với dữ liệu daily. Việc cố định horizon giúp pipeline đơn giản, mô hình tập trung vào tín hiệu ngắn hạn thay vì đa bước phức tạp.
+Các đặc trưng kỹ thuật được sử dụng gồm return_1d (tỷ suất sinh lợi một ngày hiện tại), MA5 và MA20 (trung bình trượt 5 và 20 phiên), vol_10 (độ lệch chuẩn của return trong 10 ngày). MA5 phản ánh xu hướng rất ngắn hạn, MA20 phản ánh xu hướng ngắn-trung hạn, trong khi vol_10 đo lường biến động, hỗ trợ đánh giá rủi ro. Các đặc trưng này dễ tính, ít nhạy với nhiễu so với chỉ báo phức tạp, và cung cấp nền tảng đủ mạnh để so sánh Linear Regression và LSTM. Lookback mặc định cho LSTM là 30 bước, giúp mô hình nhận ngữ cảnh lịch sử đủ dài để học phụ thuộc mà không quá lớn gây nổ tham số.
+
+3.3. Công cụ và môi trường triển khai
+Ngôn ngữ Python 3.10+ được chọn nhờ hệ sinh thái phong phú cho khoa học dữ liệu và học máy. pandas và numpy đảm nhận vai trò xử lý, thao tác dữ liệu; scikit-learn cung cấp Linear Regression và công cụ chuẩn hóa (StandardScaler); tensorflow hỗ trợ xây dựng và huấn luyện LSTM; matplotlib phục vụ trực quan hóa; yfinance dùng để tải dữ liệu trực tuyến. Các thư viện này là tiêu chuẩn de facto trong cộng đồng, tài liệu phong phú, phù hợp môi trường học thuật lẫn công nghiệp.
+SQLAlchemy và pyodbc được dùng để kết nối và thao tác với SQL Server qua ODBC Driver 17. SQL Server đóng vai trò kho dữ liệu quan hệ, đảm bảo ACID, hỗ trợ khóa giao dịch và dễ dàng tích hợp với công cụ BI. Việc lưu trữ vào SQL Server cũng phù hợp khi triển khai trong doanh nghiệp, nơi hạ tầng cơ sở dữ liệu quan hệ phổ biến và được quản trị chặt chẽ.
+Tệp config/config.yaml quản lý các thông số kết nối cơ sở dữ liệu, tỷ lệ chia tập train/validation/test, lookback, horizon và cấu hình logging. Cách tiếp cận “configuration-as-data” giúp tách biệt logic mã nguồn và tham số vận hành, tăng tính linh hoạt và khả năng tái sử dụng pipeline trong nhiều môi trường khác nhau. Khi mở rộng, có thể bổ sung tham số như signal_threshold, stop-loss, take-profit hoặc lịch biểu để tự động hóa.
+
+Tóm tắt Chương 3
+Chương 3 đã mô tả nguồn dữ liệu, đặc điểm trường thông tin và cách tổ chức lưu trữ đa tầng (raw, processed, features) song song CSV và SQL Server. Các đặc trưng kỹ thuật, nhãn và horizon được giải thích để làm rõ cơ sở dữ liệu phục vụ mô hình hóa. Bộ công cụ Python và SQL Server được lựa chọn vì tính ổn định, phổ biến và khả năng tích hợp, tạo nền tảng vững chắc cho pipeline ở Chương 4. Những nội dung này đảm bảo dữ liệu đủ sạch, đủ thông tin và hạ tầng đủ tin cậy cho bước triển khai mô hình và bot giao dịch.
+
+CHƯƠNG 4: PHƯƠNG PHÁP VÀ MÔ HÌNH ĐỀ XUẤT
+
+4.1. Quy trình xử lý dữ liệu
+Quy trình xử lý dữ liệu được thiết kế theo mô hình ETL (Extract, Transform, Load) tuần tự, đảm bảo mỗi bước đều có đầu vào, đầu ra rõ ràng và có thể kiểm tra. Bước Extract: crawl_data.py đọc danh sách mã từ config/tickers_vn.csv, tải giá từ Yahoo Finance, lưu CSV tại data/raw và chèn vào bảng prices_raw. Trong quá trình này, bảng tickers được upsert để đồng bộ thông tin mã và tên. Việc lưu trữ song song giúp kiểm soát chất lượng và tái hiện dữ liệu thô khi cần.
+Bước Transform: preprocess.py làm sạch dữ liệu bằng cách kiểm tra kiểu dữ liệu, loại bỏ bản ghi thiếu hoặc bất thường (volume bằng 0, giá <= 0), chuẩn hóa trade_date, sắp xếp theo ticker và thời gian, lưu kết quả vào prices_clean và CSV tại data/processed. Mục tiêu là đảm bảo tính Veracity và chuẩn bị dữ liệu nhất quán cho bước tạo đặc trưng.
+Bước Load/Feature: feature_engineering.py tính các đặc trưng kỹ thuật (return_1d, MA5, MA20, vol_10) và nhãn label_next_return, lưu vào CSV data/features và MERGE vào bảng features để cập nhật incremental. Việc MERGE giúp tránh trùng lặp khi chạy nhiều lần và chỉ bổ sung phần thiếu. load_clean_to_db.py hỗ trợ nạp lại dữ liệu sạch vào DB nếu nguồn CSV được điều chỉnh hoặc cập nhật thủ công.
+Luồng dữ liệu xuyên suốt pipeline: Yahoo Finance → prices_raw → prices_clean → features → models → predictions → backtest_trades. Mỗi tầng đều có file CSV và bảng tương ứng, hỗ trợ kiểm tra, phục hồi và mở rộng. Logging ở từng bước giúp truy vết, phát hiện lỗi và cải thiện chất lượng dữ liệu.
+
+4.2. Xây dựng mô hình dự đoán giá
+Chia dữ liệu theo thời gian: Dữ liệu đặc trưng được sắp xếp theo trade_date và chia train/validation/test theo tỷ lệ cấu hình (70/15/15). Không thực hiện shuffle để tránh rò rỉ thông tin tương lai. Việc chia theo thời gian bảo đảm điều kiện thực nghiệm gần với triển khai thực tế.
+Linear Regression: Đặc trưng được chuẩn hóa bằng StandardScaler (trung bình 0, độ lệch chuẩn 1) để ổn định tối ưu. Mô hình tối thiểu hóa sai số bình phương giữa dự báo label_next_return và giá trị thực. Sau huấn luyện, mô hình được lưu tại models/linear_regression/linear_regression_model.pkl. Ưu điểm là đơn giản, nhanh, dễ diễn giải; hạn chế là khó bắt quan hệ phi tuyến và phụ thuộc dài hạn.
+LSTM: Dữ liệu được scale bằng MinMaxScaler, sau đó tạo sequence lookback 30 ngày cho mỗi ticker. Kiến trúc gồm LSTM 64 đơn vị, Dense 32, Dense 1, tối ưu bằng Adam, hàm mất mát MSE, EarlyStopping trên val_loss để tránh overfitting. Mô hình và scaler được lưu tại models/lstm (lstm_model.h5, scaler.pkl). LSTM có khả năng học phi tuyến và phụ thuộc dài hơn, nhưng cần nhiều dữ liệu và chi phí huấn luyện cao hơn.
+So sánh tư duy thiết kế: Linear Regression đại diện cho mô hình truyền thống, phù hợp baseline và giải thích hệ số; LSTM đại diện cho mô hình sâu, mạnh hơn trên quan hệ phi tuyến. Việc triển khai song song hai mô hình cho phép đánh giá thực nghiệm trên cùng bộ đặc trưng, cung cấp cái nhìn định lượng về lợi thế và chi phí của từng phương pháp.
+
+4.3. Thiết kế bot giao dịch tự động
+Thành phần dự báo: predict.py tải các đặc trưng gần nhất đủ lookback, chạy cả Linear Regression và LSTM để tạo pred_return, tính pred_price = close × (1 + pred_return), lưu vào preds/daily_predictions.csv và bảng predictions. Thông tin model_name, horizon được lưu kèm để phân tách kết quả theo mô hình.
+Sinh tín hiệu và mô phỏng danh mục: bot_backtest.py đọc predictions (có thể chọn ngày gần nhất hoặc toàn bộ lịch sử), sinh tín hiệu BUY/SELL/HOLD dựa trên ngưỡng signal_threshold. Danh mục được mô phỏng với initial_cash, giới hạn vị thế theo position_size_pct, áp dụng stop-loss và take-profit để kiểm soát rủi ro. Mỗi giao dịch cập nhật cash, position và equity_after, ghi vào preds/backtest/backtest_results.csv và backtest_trades.
+Quản trị rủi ro: stop-loss giúp cắt lỗ khi giá giảm dưới ngưỡng, take-profit giúp chốt lời khi giá đạt mục tiêu, position_size_pct tránh tập trung rủi ro vào một mã. Các tham số này được cấu hình trong config/config.yaml để dễ điều chỉnh mà không sửa mã. Việc mô phỏng dưới các giả định rõ ràng (chưa tính phí, chưa xét trượt giá) giúp đánh giá tương đối chiến lược trước khi bổ sung giả định thực tế hơn.
+Kiến trúc hệ thống tổng thể: pipeline dữ liệu cung cấp nguồn cho mô hình; mô hình cung cấp dự báo cho bot; bot chuyển đổi dự báo thành hành động và đánh giá qua backtest. Mối liên kết chặt chẽ này đảm bảo tính nhất quán dữ liệu, giảm sai sót thủ công và tạo nền tảng mở rộng sang triển khai thời gian thực khi bổ sung lịch biểu và kết nối broker.
+
+4.4. Tiêu chí đánh giá mô hình
+Đánh giá dự báo giá: MAE đo sai số tuyệt đối trung bình giữa pred_price và actual_close; RMSE lấy căn bậc hai sai số bình phương, nhấn mạnh các sai số lớn; MAPE đo sai số phần trăm, thuận tiện so sánh giữa các mã khác thang giá. Việc kết hợp ba thước đo giúp nhìn nhận cả sai số trung bình, độ nhạy với ngoại lệ và sai số tương đối.
+Đánh giá dự báo return: Tương tự, MAE/RMSE/MAPE được áp dụng cho pred_return và actual_return, phản ánh chất lượng dự báo động lượng/tỷ suất sinh lợi. Return có phân phối có thể lệch và nhiễu, nên cần quan sát cả phân phối sai số để tránh bị chi phối bởi vài điểm ngoại lai.
+Đánh giá chiến lược: equity curve cho biết diễn biến giá trị danh mục theo thời gian; PnL theo mã giúp xác định đóng góp từng cổ phiếu; win-rate đo tỷ lệ giao dịch có lãi; so sánh với buy-and-hold là benchmark đơn giản để kiểm tra xem chiến lược có tạo alpha hay không. Các biểu đồ từ plots.py hỗ trợ trực quan hóa, giúp phân tích định tính bên cạnh các chỉ số định lượng.
+
+Tóm tắt Chương 4
+Chương 4 đã trình bày chi tiết phương pháp và mô hình: quy trình ETL từ crawl đến tạo đặc trưng, thiết kế và huấn luyện hai mô hình Linear Regression và LSTM, cấu trúc bot giao dịch cùng cơ chế backtest và quản trị rủi ro, và bộ tiêu chí đánh giá. Đây là “trái tim” của đề tài, liên kết dữ liệu, mô hình và chiến lược giao dịch trong một pipeline khép kín. Những nội dung này làm tiền đề cho phần thực nghiệm và thảo luận ở Chương 5, nơi các kết quả sẽ được trình bày và phân tích.

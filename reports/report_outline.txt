@@ -1,0 +1,119 @@
+CHƯƠNG 1: GIỚI THIỆU
+1.1. Lý do chọn đề tài
+- Nhu cầu dự đoán giá cổ phiếu và tự động hóa giao dịch tăng cao trong thị trường Việt Nam; dữ liệu lịch sử giá sẵn có trên Yahoo Finance và có thể khai thác bằng Big Data.
+- Kết hợp học máy (Linear Regression) và deep learning (LSTM) giúp so sánh mô hình truyền thống và mô hình chuỗi thời gian hiện đại.
+- Hệ thống lưu trữ vào SQL Server hỗ trợ truy vấn, đánh giá và mở rộng phân tích sau này.
+
+1.2. Mục tiêu nghiên cứu
+- Xây dựng pipeline hoàn chỉnh thu thập, làm sạch, tạo đặc trưng và dự đoán giá cổ phiếu Việt Nam.
+- So sánh hiệu quả mô hình Linear Regression và LSTM trên dữ liệu thực tế.
+- Phát triển bot backtest để kiểm thử chiến lược giao dịch dựa trên dự báo giá/return.
+
+1.3. Đối tượng và phạm vi nghiên cứu
+- Đối tượng: Các mã cổ phiếu niêm yết Việt Nam (danh sách trong config/tickers_vn.csv).
+- Phạm vi: Dữ liệu lịch sử giá daily từ Yahoo Finance; tập trung vào dự báo horizon ngắn (1 ngày) và backtest chiến lược đơn giản BUY/SELL/HOLD.
+- Không bao gồm: Giao dịch thật trên sàn, dữ liệu intraday, phí giao dịch/chênh lệch giá.
+
+1.4. Phương pháp nghiên cứu
+- Thu thập và làm sạch dữ liệu thời gian; tạo đặc trưng kỹ thuật (MA5/MA20, return, volatility).
+- Huấn luyện mô hình học máy (Linear Regression) và deep learning (LSTM) với tách tập theo thời gian.
+- Đánh giá bằng MAE, RMSE, MAPE trên giá và return; backtest chiến lược tín hiệu.
+- Lưu trữ, trực quan hóa và so sánh kết quả qua báo cáo, biểu đồ.
+
+1.5. Cấu trúc báo cáo
+- Chương 1 giới thiệu lý do, mục tiêu, phạm vi, phương pháp.
+- Chương 2 trình bày cơ sở lý thuyết Big Data, bài toán dự báo giá, mô hình ML/DL và bot giao dịch.
+- Chương 3 mô tả dữ liệu và công cụ.
+- Chương 4 nêu quy trình, mô hình, bot và tiêu chí đánh giá.
+- Chương 5 trình bày thực nghiệm, kết quả, đánh giá mô hình/bot.
+- Chương 6 kết luận, hạn chế, hướng phát triển; cuối cùng là tài liệu tham khảo.
+
+CHƯƠNG 2: CƠ SỞ LÝ THUYẾT VÀ TỔNG QUAN
+2.1. Tổng quan về Big Data
+- Đặc trưng 4V (Volume, Velocity, Variety, Veracity) trong dữ liệu tài chính; yêu cầu lưu trữ và xử lý tuần tự.
+- Các hạ tầng phổ biến: cơ sở dữ liệu quan hệ, kho dữ liệu, nền tảng tính toán phân tán (chưa sử dụng trong đề tài nhưng là hướng mở rộng).
+
+2.2. Bài toán dự đoán giá cổ phiếu
+- Dự báo giá/return ngắn hạn để hỗ trợ quyết định giao dịch; rủi ro nhiễu cao, cần xử lý chuỗi thời gian và tránh look-ahead bias.
+- Sử dụng đặc trưng kỹ thuật đơn giản (MA, biến động, return) làm baseline trước khi mở rộng thêm macro/news.
+
+2.3. Các mô hình học máy và deep learning dùng trong dự đoán
+- Học máy tuyến tính: Linear Regression (baseline, dễ diễn giải).
+- Deep learning chuỗi thời gian: LSTM để nắm bắt phụ thuộc dài hạn.
+- Tiền xử lý: Chuẩn hóa/scale dữ liệu, tạo sequence lookback.
+
+2.4. Tổng quan về bot giao dịch tự động
+- Thành phần: lấy dự báo, sinh tín hiệu BUY/SELL/HOLD, quản trị rủi ro (stop-loss, take-profit), mô phỏng danh mục.
+- Backtest để kiểm tra chiến lược trước khi triển khai thực tế; cần tránh bias và giả định chi phí giao dịch.
+
+CHƯƠNG 3: DỮ LIỆU VÀ CÔNG CỤ SỬ DỤNG
+3.1. Nguồn dữ liệu
+- Yahoo Finance cho giá daily các mã VN (mapping trong config/tickers_vn.csv).
+- Lưu trữ CSV tại data/raw, data/processed, data/features; đồng thời chèn vào SQL Server (prices_raw, prices_clean, features).
+
+3.2. Đặc điểm dữ liệu
+- Trường chính: trade_date, open/high/low/close/adj_close, volume; nhãn label_next_return cho huấn luyện.
+- Đặc trưng kỹ thuật: return_1d, MA5, MA20, vol_10 (độ lệch chuẩn return 10 ngày).
+- Horizon dự báo: 1 ngày; lookback LSTM: mặc định 30 bước.
+
+3.3. Công cụ và môi trường triển khai
+- Ngôn ngữ: Python 3.10+; thư viện: pandas, numpy, scikit-learn, tensorflow, matplotlib, yfinance, sqlalchemy, pyodbc, pyyaml.
+- Cơ sở dữ liệu: SQL Server (driver ODBC 17).
+- Cấu hình: config/config.yaml (kết nối DB, tỷ lệ train/val/test, logging).
+
+CHƯƠNG 4: PHƯƠNG PHÁP VÀ MÔ HÌNH ĐỀ XUẤT
+4.1. Quy trình xử lý dữ liệu
+- crawl_data.py: tải giá từ Yahoo, lưu CSV raw, chèn prices_raw, upsert tickers.
+- preprocess.py: làm sạch (loại dữ liệu thiếu, volume 0, giá <= 0), lưu prices_clean.
+- feature_engineering.py: tính đặc trưng và nhãn, MERGE vào features, lưu CSV.
+- load_clean_to_db.py: tùy chọn nạp CSV sạch vào DB.
+
+4.2. Xây dựng mô hình dự đoán giá
+- Linear Regression: chuẩn hóa đặc trưng, huấn luyện trên train, lưu models/linear_regression.
+- LSTM: scale MinMax, tạo sequence lookback 30, kiến trúc LSTM(64) → Dense(32) → Dense(1), early stopping, lưu models/lstm + scaler.
+- Tách tập theo thời gian với tỉ lệ cấu hình (70/15/15).
+
+4.3. Thiết kế bot giao dịch tự động
+- predict.py: đọc features mới nhất, chạy cả hai mô hình, tính pred_return và pred_price, lưu preds/daily_predictions.csv và bảng predictions.
+- bot_backtest.py: sinh tín hiệu theo ngưỡng (signal_threshold), mô phỏng danh mục với initial_cash, stop-loss, take-profit, position_size_pct; kết quả lưu preds/backtest/backtest_results.csv và backtest_trades.
+
+4.4. Tiêu chí đánh giá mô hình
+- Sai số giá: MAE, RMSE, MAPE giữa pred_price và actual_close (evaluate_models.py).
+- Sai số return: MAE, RMSE, MAPE giữa pred_return và actual_return.
+- Đánh giá chiến lược: equity curve, PnL theo mã, win-rate, so sánh với buy-hold (plots.py).
+
+CHƯƠNG 5: THỰC NGHIỆM VÀ ĐÁNH GIÁ
+5.1. Thiết lập thực nghiệm
+- Cấu hình DB, tickers, và tham số pipeline trong config/config.yaml.
+- Chạy tuần tự run_pipeline.py hoặc từng bước để sinh dữ liệu, huấn luyện và dự báo.
+
+5.2. Kết quả dự đoán
+- Xuất CSV dự báo tại preds/daily_predictions.csv; chứa trade_date, ticker_id, pred_return, pred_price cho Linear Regression và LSTM.
+
+5.3. Đánh giá hiệu quả mô hình
+- evaluate_models.py sinh reports/metrics_by_model.csv và metrics_by_model_ticker.csv với MAE/RMSE/MAPE giá và return.
+- Phân tích chênh lệch giữa hai mô hình để chọn mô hình vận hành.
+
+5.4. Đánh giá bot giao dịch (nếu có)
+- Kết quả backtest tại preds/backtest/backtest_results.csv và bảng backtest_trades.
+- Chỉ số: equity_after theo thời gian, số lệnh BUY/SELL/STOP, PnL theo mã, win-rate; biểu đồ lưu trong reports/charts/.
+
+CHƯƠNG 6: KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN
+6.1. Kết luận chung
+- Pipeline đã hoàn thiện: crawl → clean → feature → train → predict → backtest, tích hợp SQL Server và xuất báo cáo.
+- Hai mô hình (Linear, LSTM) cung cấp baseline so sánh; bot backtest đánh giá khả năng sinh lợi/ổn định.
+
+6.2. Hạn chế của đề tài
+- Đặc trưng còn đơn giản (chưa dùng dữ liệu vĩ mô, order book, tin tức); horizon chỉ 1 ngày.
+- Chưa tính phí giao dịch/slippage; backtest giả định khớp lệnh đầy đủ.
+- Chưa triển khai realtime hay lịch job; chưa tối ưu hyperparameter hệ thống.
+
+6.3. Hướng nghiên cứu tiếp theo
+- Bổ sung đặc trưng nâng cao (technical phức tạp, sự kiện doanh nghiệp, tin tức, sentiment).
+- Thử nghiệm mô hình khác (XGBoost, Transformer time-series) và tuning hyperparameter.
+- Triển khai scheduler/broker API để vận hành gần realtime; thêm quản trị rủi ro/portfolio nâng cao.
+
+TÀI LIỆU THAM KHẢO
+- Tài liệu thư viện: pandas, scikit-learn, tensorflow, yfinance, SQLAlchemy/pyodbc.
+- Bài viết/mô hình dự báo chuỗi thời gian tài chính (MA/LSTM/Transformer).
+- Hướng dẫn thực hành backtesting và quản trị rủi ro trong giao dịch thuật toán.

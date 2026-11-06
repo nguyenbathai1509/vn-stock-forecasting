@@ -1,0 +1,2 @@
+model_name,count_price,mae_price,rmse_price,mape_price,count_return,mae_return,rmse_return,mape_return
+linear_regression,2462,742.9950622425317,1621.807854341966,0.01598899527809151,3051,0.007314309007704678,0.015556284052135938,1.0226733993551251

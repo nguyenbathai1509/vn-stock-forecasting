@@ -1,0 +1,18 @@
+# Configuration file for stock prediction pipeline
+sql_server:
+  username: sa
+  password: YourStrong!Passw0rd
+  server: localhost,1433
+  database: StockDB
+  driver: "ODBC Driver 17 for SQL Server"
+
+pipeline:
+  lookback_window: 30
+  prediction_horizon: 1
+  train_ratio: 0.7
+  val_ratio: 0.15
+  test_ratio: 0.15
+
+logging:
+  level: INFO
+  file: logs/pipeline.log

@@ -1,0 +1,66 @@
+ticker_vn,ticker_yahoo,name,sector
+VCB,VCB.VN,Vietcombank,Banking
+BID,BID.VN,BIDV,Banking
+CTG,CTG.VN,VietinBank,Banking
+TCB,TCB.VN,Techcombank,Banking
+VPB,VPB.VN,VPBank,Banking
+MBB,MBB.VN,MBBank,Banking
+ACB,ACB.VN,ACB,Banking
+STB,STB.VN,Sacombank,Banking
+HDB,HDB.VN,HDBank,Banking
+VIB,VIB.VN,VIB,Banking
+TPB,TPB.VN,TPBank,Banking
+SHB,SHB.VN,SHB,Banking
+LPB,LPB.VN,LPBank,Banking
+EIB,EIB.VN,Eximbank,Banking
+MSB,MSB.VN,MSB,Banking
+OCB,OCB.VN,OCB,Banking
+VIC,VIC.VN,Vingroup,Real Estate & Industrial
+VHM,VHM.VN,Vinhomes,Real Estate & Industrial
+VRE,VRE.VN,Vincom Retail,Real Estate & Industrial
+NVL,NVL.VN,Novaland,Real Estate & Industrial
+PDR,PDR.VN,Phat Dat,Real Estate & Industrial
+DIG,DIG.VN,DIC Corp,Real Estate & Industrial
+DXG,DXG.VN,Dat Xanh,Real Estate & Industrial
+NLG,NLG.VN,Nam Long,Real Estate & Industrial
+KDH,KDH.VN,Khang Dien,Real Estate & Industrial
+BCM,BCM.VN,Becamex,Real Estate & Industrial
+KBC,KBC.VN,Kinh Bac,Real Estate & Industrial
+SZL,SZL.VN,Sonadezi Long Thanh,Real Estate & Industrial
+SSI,SSI.VN,SSI,Securities
+VND,VND.VN,VNDIRECT,Securities
+VCI,VCI.VN,Vietcap,Securities
+HCM,HCM.VN,Ho Chi Minh City Securities,Securities
+VIX,VIX.VN,VIX Securities,Securities
+FTS,FTS.VN,FPT Securities,Securities
+BSI,BSI.VN,BSC,Securities
+CTS,CTS.VN,VietinBank Securities,Securities
+AGR,AGR.VN,Agribank Securities,Securities
+HPG,HPG.VN,Hoa Phat,Steel & Building Materials
+HSG,HSG.VN,Hoa Sen,Steel & Building Materials
+NKG,NKG.VN,Nam Kim,Steel & Building Materials
+GAS,GAS.VN,PV GAS,Energy & Chemicals
+PLX,PLX.VN,Petrolimex,Energy & Chemicals
+POW,POW.VN,PV Power,Energy & Chemicals
+PVD,PVD.VN,PVD Drilling,Energy & Chemicals
+PVT,PVT.VN,PV Trans,Energy & Chemicals
+DGC,DGC.VN,Duc Giang Chemicals,Energy & Chemicals
+DPM,DPM.VN,Dam Phu My,Energy & Chemicals
+DCM,DCM.VN,Dam Ca Mau,Energy & Chemicals
+FPT,FPT.VN,FPT,Technology & Consumer
+MWG,MWG.VN,Mobile World,Technology & Consumer
+FRT,FRT.VN,FPT Retail,Technology & Consumer
+MSN,MSN.VN,Masan Group,Technology & Consumer
+VNM,VNM.VN,Vinamilk,Technology & Consumer
+SAB,SAB.VN,Sabeco,Technology & Consumer
+PNJ,PNJ.VN,Phu Nhuan Jewelry,Technology & Consumer
+VJC,VJC.VN,Vietjet Air,Transport & Aviation
+HVN,HVN.VN,Vietnam Airlines,Transport & Aviation
+GMD,GMD.VN,Gemadept,Transport & Aviation
+HAH,HAH.VN,Hai An Transport & Stevedoring,Transport & Aviation
+VOS,VOS.VN,Vietnam Ocean Shipping,Transport & Aviation
+VHC,VHC.VN,Vinh Hoan,Agriculture & Aquaculture
+ANV,ANV.VN,Nam Viet,Agriculture & Aquaculture
+IDI,IDI.VN,IDI Fisheries,Agriculture & Aquaculture
+HAG,HAG.VN,Hoang Anh Gia Lai,Agriculture & Aquaculture
+DBC,DBC.VN,Dabaco,Agriculture & Aquaculture
